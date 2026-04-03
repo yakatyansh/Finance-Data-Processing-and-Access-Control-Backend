@@ -11,6 +11,9 @@ import (
 func CreateRecord(c *gin.Context) {
 	var record models.Record
 
+	userID, _ := c.Get("userID")
+	record.UserID = userID.(string)
+
 	if err := c.ShouldBindJSON(&record); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return

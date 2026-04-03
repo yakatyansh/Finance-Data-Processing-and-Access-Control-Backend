@@ -18,4 +18,9 @@ func RegisterRoutes(r *gin.Engine) {
 		record.POST("/", middleware.Authorize("ADMIN"), controllers.CreateRecord)
 		record.GET("/", middleware.Authorize("ADMIN", "ANALYST", "VIEWER"), controllers.GetRecords)
 	}
+	dashboard := r.Group("/dashboard")
+	dashboard.Use(middleware.AuthMiddleware())
+	{
+		dashboard.GET("/summary", controllers.GetDashboard)
+	}
 }
