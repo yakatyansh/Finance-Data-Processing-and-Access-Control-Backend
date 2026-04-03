@@ -11,6 +11,7 @@ func RegisterRoutes(r *gin.Engine) {
 	auth := r.Group("/auth")
 	{
 		auth.POST("/register", controllers.Register)
+		auth.POST("/login", controllers.Login) // 🔥 ADD THIS
 	}
 	record := r.Group("/records")
 	record.Use(middleware.AuthMiddleware())
